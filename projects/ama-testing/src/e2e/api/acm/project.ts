@@ -57,6 +57,17 @@ export class ACMProject implements ProjectApi {
         return await this.requestApiHelper.get(`/v1/projects/${projectId}`);
     }
 
+    async getDecisionTableId(projectId: string, decisionTableName: string) {
+        let decisionTableId;
+        const data = await this.requestApiHelper.get(`/v1/projects/${projectId}/models?type=DECISION`);
+        for (const key in data) {
+            if (data[key].name === decisionTableName) {
+                decisionTableId = data[key].id;
+            }
+        }
+        return decisionTableId;
+    }
+
     async delete(projectId: string) {
         await this.requestApiHelper.delete(`/v1/projects/${projectId}`);
     }
