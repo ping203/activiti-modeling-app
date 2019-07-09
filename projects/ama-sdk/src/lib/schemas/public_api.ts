@@ -22,6 +22,7 @@ import { uiSchema } from './ui.schema';
 import { propertiesSchema } from './properties.schema';
 import { formSchema } from './form.schema';
 import { extensionsSchema } from './extensions.schema';
+import { processXmlSchemaNode } from './processXml.schema';
 
 export {
     connectorSchema,
@@ -30,5 +31,6 @@ export {
     uiSchema,
     propertiesSchema,
     formSchema,
-    extensionsSchema
+    extensionsSchema,
+    processXmlSchemaNode
 };

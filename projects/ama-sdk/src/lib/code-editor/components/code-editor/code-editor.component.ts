@@ -39,7 +39,8 @@ const DEFAULT_OPTIONS = {
     minimap: {
         enabled: false
     },
-    automaticLayout: true
+    automaticLayout: true,
+    suggestOnTriggerCharacters: true
 };
 
 @Component({
@@ -67,7 +68,7 @@ export class CodeEditorComponent implements OnDestroy, OnInit {
         this.editorModel = {
             value: this.content,
             language: this.language,
-            uri: this.fileUri
+            uri: this.fileUri,
         };
     }
 

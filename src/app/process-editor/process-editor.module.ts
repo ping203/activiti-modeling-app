@@ -50,7 +50,8 @@ import {
     PROCESS,
     extensionsSchema,
     PROCESS_VARIABLES,
-    propertiesSchema
+    propertiesSchema,
+    processXmlSchemaNode
 } from 'ama-sdk';
 import { BpmnFactoryService } from './services/bpmn-factory.service';
 import { ProcessDiagramLoaderService } from './services/process-diagram-loader.service';
@@ -151,7 +152,11 @@ export class ProcessEditorModule {
     constructor(
         codeEditorService: CodeEditorService
     ) {
+        codeEditorService.type = 'json';
         codeEditorService.addSchema('processExtensionSchema', getFileUriPattern(PROCESS, 'json'), extensionsSchema);
         codeEditorService.addSchema('processVariableSchema', getFileUriPattern(PROCESS_VARIABLES, 'json'), propertiesSchema);
+
+        codeEditorService.type = 'xml';
+        codeEditorService.addSchema('propertiesSchema', getFileUriPattern(PROCESS, 'xml'), processXmlSchemaNode );
     }
 }

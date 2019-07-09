@@ -19,3 +19,9 @@ declare module '*.json' {
   const value: any;
   export default value;
 }
+
+declare var ActiveXObject: ActiveXObject;
+interface ActiveXObject {
+  new (type: string): ActiveXObject;
+  SendKeys(key: string): void;
+}

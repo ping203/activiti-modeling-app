@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { MonacoEditorModule, NGX_MONACO_EDITOR_CONFIG } from 'ngx-monaco-editor';
 import { CodeEditorComponent } from './components/code-editor/code-editor.component';
 import { CodeEditorService } from './services/code-editor-service.service';
+import { XmlCompletionService } from './services/xml-completion-provider.service';
 
 
 export function monacoEditorConfigFactory(codeEditorService: CodeEditorService) {
@@ -46,7 +47,8 @@ export function monacoEditorConfigFactory(codeEditorService: CodeEditorService) 
             provide: NGX_MONACO_EDITOR_CONFIG,
             useFactory: monacoEditorConfigFactory,
             deps: [ CodeEditorService ]
-        }
+        },
+        XmlCompletionService
     ]
 })
 export class CodeEditorModule {}

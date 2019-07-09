@@ -17,6 +17,7 @@
 
 import { Injectable } from '@angular/core';
 import { arrayize } from '../../helpers/utils/arrayize';
+import { XmlCompletionService } from './xml-completion-provider.service';
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +25,13 @@ import { arrayize } from '../../helpers/utils/arrayize';
 export class CodeEditorService {
 
     private schemas = [];
+    private editorType = 'json';
+
+    set type(type: string) {
+        this.editorType = type;
+    }
+
+    constructor( private xmlCompletionService: XmlCompletionService) {}
 
     addSchema(uri: string, fileMatch: string | string[], schema: string | Object) {
         this.schemas.push({
@@ -41,9 +49,17 @@ export class CodeEditorService {
     }
 
     private onMonacoLoad() {
-        monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-            validate: true,
-            schemas: this.schemas
-        });
+        if (this.editorType === 'json') {
+            monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+                validate: true,
+                schemas: this.schemas
+            });
+        } else {
+            monaco.languages.registerCompletionItemProvider('xml', this.getXmlCompletionProvider());
+        }
+    }
+
+    getXmlCompletionProvider(): any {
+        return this.xmlCompletionService.getXmlCompletionProvider(monaco);
     }
 }
